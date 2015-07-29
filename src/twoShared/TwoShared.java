@@ -34,8 +34,7 @@ public class TwoShared {
 	
 	static WebDriver driver=new FirefoxDriver();
 		
-	public static void openUrl() throws Throwable
-	{
+	public static void openUrl() throws Throwable {
 		driver.get("http://www.2shared.com/");
 		System.out.println("Title of the window: "+driver.getTitle());
 		System.out.println("Page uploaded successfully");
@@ -44,8 +43,7 @@ public class TwoShared {
 		System.out.println("Window has maximized");
 	}
 		
-	public static void exitUrl()
-	{
+	public static void exitUrl() {
 		driver.quit();
 	}
 	
@@ -60,14 +58,12 @@ public class TwoShared {
 		return tool;
 	}
 		
-	public static void screenshot(String path) throws Throwable
-	{
+	public static void screenshot(String path) throws Throwable {
 		File scrFile = (File) ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(scrFile, new File(path));
 	}
  	
-	public static String excelRead(int c,int r) throws Throwable
-	{
+	public static String excelRead(int c,int r) throws Throwable {
 		FileInputStream fi = new FileInputStream("C://Users//PC//Desktop//Auto//Excel1.xls");
 		Workbook wwb1 = Workbook.getWorkbook(fi);
 		Sheet wsht1 = wwb1.getSheet("Sheet");
@@ -76,66 +72,65 @@ public class TwoShared {
 		return s;
 	}
  	
-	public static void excelWrite() throws Throwable
-	{
+	public static void excelWrite() throws Throwable {
 		FileOutputStream fn = new FileOutputStream("C://Users//PC//Desktop//Auto//Excel2.xls");
-        WritableWorkbook wwb1 = Workbook.createWorkbook(fn);
+        	WritableWorkbook wwb1 = Workbook.createWorkbook(fn);
 		WritableSheet wsht1 = wwb1.createSheet("Sheet", 0);
 		
 		System.out.println("The Error Messages are:");
-        String e1=("Error message when no data is entered: ");
-        System.out.print(e1);
-        Label em1 = new Label(0, 0, e1);
+        	String e1=("Error message when no data is entered: ");
+        	System.out.print(e1);
+        	Label em1 = new Label(0, 0, e1);
 		wsht1.addCell(em1);
 		login("","","");
 		WebElement ErrMsg10 =driver.findElement(By.id("loginErrorMsg"));
-	    String error10=ErrMsg10.getText();
-	    Assert.assertEquals(excelRead(0,1),error10);
-	    Label l1 = new Label(1, 0, error10);
+		String error10=ErrMsg10.getText();
+	    	Assert.assertEquals(excelRead(0,1),error10);
+	    	Label l1 = new Label(1, 0, error10);
 		wsht1.addCell(l1);
 
 		String e2=("Error message when only email is entered: ");
-	    System.out.print(e2);
-	    Label em2 = new Label(0, 1, e2);
+	    	System.out.print(e2);
+		Label em2 = new Label(0, 1, e2);
 		wsht1.addCell(em2);
 		login("a","","");
 		WebElement ErrMsg20 =driver.findElement(By.id("loginErrorMsg"));
-	    String error20=ErrMsg20.getText();
-	    Assert.assertEquals(excelRead(0,2),error20);
-	    Label l2 = new Label(1, 1, error20);
+	    	String error20=ErrMsg20.getText();
+	    	Assert.assertEquals(excelRead(0,2),error20);
+	    	Label l2 = new Label(1, 1, error20);
 		wsht1.addCell(l2);
 
 		String e3=("Error message when wrong email and password is entered: ");
-	    System.out.print(e3);
-	    Label em3 = new Label(0, 2, e3);
+	    	System.out.print(e3);
+	    	Label em3 = new Label(0, 2, e3);
 		wsht1.addCell(em3);
 		login("a","a","");
 		WebElement ErrMsg30 =driver.findElement(By.id("loginErrorMsg"));
-	    String error30=ErrMsg30.getText();
-	    Assert.assertEquals(excelRead(0,3),error30);
-	    Label l3 = new Label(1, 2, error30);
+	    	String error30=ErrMsg30.getText();
+	    	Assert.assertEquals(excelRead(0,3),error30);
+	    	Label l3 = new Label(1, 2, error30);
 		wsht1.addCell(l3);
 
 		String e4=("Error message when password and confirm password entered dont match: ");
-	    System.out.print(e4);
-	    Label em4 = new Label(0, 3, e4);
+	    	System.out.print(e4);
+	    	Label em4 = new Label(0, 3, e4);
 		wsht1.addCell(em4);
 		login("a@test.com","a","");
 		WebElement ErrMsg40 =driver.findElement(By.id("loginErrorMsg"));
-	    String error40=ErrMsg40.getText();
-	    Assert.assertEquals(excelRead(0,4),error40);
-	    Label l4 = new Label(1, 3, error40);
+	    	String error40=ErrMsg40.getText();
+	    	Assert.assertEquals(excelRead(0,4),error40);
+	    	Label l4 = new Label(1, 3, error40);
 		wsht1.addCell(l4);
 
 		String e5=("Error message when already existing email is entered: ");
-	    System.out.print(e5);
-	    Label em5 = new Label(0, 4, e5);
+	    	System.out.print(e5);
+	    	Label em5 = new Label(0, 4, e5);
 		wsht1.addCell(em5);
 		login("a@gmail.com","a","a");
 		WebElement ErrMsg50 =driver.findElement(By.id("loginErrorMsg"));
-	    String error50=ErrMsg50.getText();
-	    Assert.assertEquals(excelRead(0,5),error50);
-	    Label l5 = new Label(1, 4, error50);
+	    	String error50=ErrMsg50.getText();
+	    	Assert.assertEquals(excelRead(0,5),error50);
+	    	Label l5 = new Label(1, 4, error50);
 		wsht1.addCell(l5);
 		
 		System.out.println("Tooltips are:");
@@ -165,8 +160,7 @@ public class TwoShared {
 		fn.close();
 	}
 	
-	public static void login(String email,String password, String confirm) throws Throwable
-	{
+	public static void login(String email,String password, String confirm) throws Throwable	{
 		WebElement Email =driver.findElement(By.id("login"));
 		Email.clear();
 		Email.sendKeys(new String[]{email});
@@ -181,8 +175,7 @@ public class TwoShared {
 		Thread.sleep(3000);
 	}
 	
-	public static void validLogin(String email,String password) throws Throwable 
-	{
+	public static void validLogin(String email,String password) throws Throwable {
 		WebElement Acct=driver.findElement(By.linkText("I already have account"));
 		Acct.click();
 		Thread.sleep(3000);
@@ -197,7 +190,7 @@ public class TwoShared {
 		Thread.sleep(3000);		
 	}
     
-	public static void logo(String Loc) throws Throwable{
+	public static void logo(String Loc) throws Throwable {
 		List<WebElement> images = driver.findElements(By.cssSelector("a>img"));
 		int j=images.size();
 		System.out.println("Total number of images: "+j);
